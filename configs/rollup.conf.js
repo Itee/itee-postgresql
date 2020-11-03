@@ -85,6 +85,7 @@ function CreateRollupConfigs ( options ) {
             configs.push( {
                 input:    input,
                 external: [
+                    'itee-database',
                     'itee-validators',
                     'itee-utils',
                     'pg-promise'
