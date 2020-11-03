@@ -54,6 +54,7 @@
         "postversion": "gulp build"
     },
     "dependencies": {
+        "uuid": "^8.3.1"
     },
     "peerDependencies": {
         "itee-database": "^8.0.2",
