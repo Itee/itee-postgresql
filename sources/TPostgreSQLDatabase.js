@@ -65,10 +65,10 @@ class TPostgreSQLDatabase extends TAbstractDatabase {
 
         this.driver.one( ` SELECT 1 `, [] )
             .then( () => {
-                console.log( `PostgreSQL at postgres://${ this._host }:${ this._port }/${ this._database } is connected !` )
+                this.logger.log( `PostgreSQL at postgres://${ this._host }:${ this._port }/${ this._database } is connected !` )
             } )
             .catch( ( error ) => {
-                console.log( 'PostgreSQL - Connection error ', error )
+                this.logger.log( 'PostgreSQL - Connection error ', error )
             } )
 
     }
