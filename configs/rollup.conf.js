@@ -15,11 +15,11 @@
 
 /* eslint-env node */
 
-const packageInfos = require( '../package' )
-const commonjs     = require( 'rollup-plugin-commonjs' )
-const path         = require( 'path' )
-const resolve      = require( 'rollup-plugin-node-resolve' )
-const terser       = require( 'rollup-plugin-terser' ).terser
+const packageInfos    = require( '../package' )
+const path            = require( 'path' )
+const commonjs        = require( '@rollup/plugin-commonjs' )
+const { nodeResolve } = require( '@rollup/plugin-node-resolve' )
+const terser          = require( 'rollup-plugin-terser' ).terser
 
 function _computeBanner ( name, format ) {
 
@@ -85,6 +85,7 @@ function CreateRollupConfigs ( options ) {
             configs.push( {
                 input:    input,
                 external: [
+                    'itee-database',
                     'itee-validators',
                     'itee-utils',
                     'pg-promise'
@@ -93,7 +94,7 @@ function CreateRollupConfigs ( options ) {
                     commonjs( {
                         include: 'node_modules/**'
                     } ),
-                    resolve( {
+                    nodeResolve( {
                         preferBuiltins: true
                     } ),
                     isProd && terser()
