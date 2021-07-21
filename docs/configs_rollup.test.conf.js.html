@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Itee-PostgreSQL Modules</title>
+	<title>Itee-PostgreSQL Source: configs/rollup.test.conf.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -67,93 +67,67 @@
 <div class="row">
 
 	
-	<div class="col-md-8">
+	<div class="col-md-12">
 	
 		<div id="main">
 			
 
-	<h1 class="page-title">Modules</h1>
+		<h1 class="page-title">Source: configs/rollup.test.conf.js</h1>
+    
 <section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">/**
+ * @author [Tristan Valcke]{@link https://github.com/Itee}
+ * @license [BSD-3-Clause]{@link https://opensource.org/licenses/BSD-3-Clause}
+ *
+ * @module Config-Rollup-Test
+ * @description The file manage the rollup configuration for build tests
+ */
 
-<header>
-    
-        <h2>
-        
-        </h2>
-        
-    
-</header>
+const packageInfos = require( '../package' )
 
+/**
+ * Will create an appropriate configuration object for rollup, related to the given arguments.
+ *
+ * @generator
+ * @return {Array.&lt;json>} An array of rollup configuration
+ */
+function CreateTestsRollupConfigs ( /*options*/ ) {
+    'use strict'
 
-<article>
-    <div class="container-overview">
-    
-        
+    return [
+        {
+            input:     `tests/units/units.js`,
+            plugins:   [],
+            treeshake: true,
+            output:    {
+                indent: '\t',
+                format: 'iife',
+                name:   'Itee.Units',
+                file:   `tests/builds/${packageInfos.name}.units.js`
+            }
+        },
+        {
+            input:     `tests/benchmarks/benchs.js`,
+            plugins:   [],
+            treeshake: true,
+            output:    {
+                indent: '\t',
+                format: 'iife',
+                name:   'Itee.Benchs',
+                file:   `tests/builds/${packageInfos.name}.benchs.js`
+            }
+        }
+    ]
 
-        
-<dl class="details">
-    
+}
 
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
+module.exports = CreateTestsRollupConfigs
+</pre>
+    </article>
 </section>
+
 
 
 
@@ -163,10 +137,6 @@
 
 	<div class="clearfix"></div>
 
-	
-		<div class="col-md-3">
-			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
-		</div>
 	
 
 </div>
