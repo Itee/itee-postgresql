@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/Itee/itee-postgresql/compare/v1.0.2...v1.0.3) (2021-07-21)
+
+
+### Bug Fixes
+
+* **readme:** add simple readme content ([567b1f5](https://github.com/Itee/itee-postgresql/commit/567b1f58ceddf22fb999fc5987d34fefa0d65df3))
+
 ## [1.0.2](https://github.com/Itee/itee-postgresql/compare/v1.0.1...v1.0.2) (2021-07-08)
 
 

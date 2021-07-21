@@ -1,4 +1,4 @@
-console.log('Itee.Database.PostgreSQL v1.0.2 - EsModule')
+console.log('Itee.Database.PostgreSQL v1.0.3 - EsModule')
 import { TAbstractDatabase, TAbstractDataController } from 'itee-database';
 import { isDefined, isNull, isUndefined, isNotString } from 'itee-validators';
 import PostgreSQL from 'pg-promise';

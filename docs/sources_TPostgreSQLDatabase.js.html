@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Itee-PostgreSQL Modules</title>
+	<title>Itee-PostgreSQL Source: sources/TPostgreSQLDatabase.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -67,93 +67,107 @@
 <div class="row">
 
 	
-	<div class="col-md-8">
+	<div class="col-md-12">
 	
 		<div id="main">
 			
 
-	<h1 class="page-title">Modules</h1>
+		<h1 class="page-title">Source: sources/TPostgreSQLDatabase.js</h1>
+    
 <section>
+    <article>
+        <pre
+            class="sunlight-highlight-javascript linenums">/**
+ * @author [Ahmed DCHAR]{@link https://github.com/dragoneel}
+ * @license [BSD-3-Clause]{@link https://opensource.org/licenses/BSD-3-Clause}
+ *
+ * @file Todo
+ *
+ * @example Todo
+ *
+ */
 
-<header>
-    
-        <h2>
-        
-        </h2>
-        
-    
-</header>
+import { TAbstractDatabase } from 'itee-database'
+import { isDefined }         from 'itee-validators'
+import PostgreSQL            from 'pg-promise'
 
+//const PostgreSQLDriver = PostgreSQL( {} )
 
-<article>
-    <div class="container-overview">
-    
-        
+class TPostgreSQLDatabase extends TAbstractDatabase {
 
-        
-<dl class="details">
-    
+    static formatConnectionString ( parameters ) {
 
-	
+        let connectionString                           = ''
+        const { user, password, host, port, database } = parameters
 
-	
+        if ( isDefined( user ) &amp;&amp; isDefined( password ) ) {
+            connectionString = `postgres://${ user }:${ password }@${ host }:${ port }/${ database }`
+        } else {
+            connectionString = `postgres://${ host }:${ port }/${ database }`
+        }
 
-	
+        return connectionString
 
-    
+    }
 
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
+    constructor ( parameters = {} ) {
 
 
+        const _parameters = {
+            ...{
+                host:     'localhost',
+                port:     '5432',
+                database: 'postgres'
+            },
+            ...parameters,
+            ...{
+                driver: PostgreSQL( {} )( TPostgreSQLDatabase.formatConnectionString( parameters ) )
+            }
+        }
 
-	
+        super( _parameters )
 
-	
+        this._user     = _parameters.user
+        this._password = _parameters.password
+        this._host     = _parameters.host
+        this._port     = _parameters.port
+        this._database = _parameters.database
 
-	
+    }
 
-	
-</dl>
+    init () {
+        super.init()
 
+    }
 
-        
-    
-    </div>
+    connect () {
 
-    
+        this.driver.one( ` SELECT 1 `, [] )
+            .then( () => {
+                this.logger.log( `PostgreSQL at postgres://${ this._host }:${ this._port }/${ this._database } is connected !` )
+            } )
+            .catch( ( error ) => {
+                this.logger.log( 'PostgreSQL - Connection error ', error )
+            } )
 
-    
+    }
 
-    
+    on ( /*eventName, callback*/ ) {}
 
-    
+    close ( onCloseCallback ) {
 
-    
+        this.driver.end()
+        onCloseCallback()
 
-    
+    }
 
-    
+}
 
-    
-
-    
-</article>
-
+export { TPostgreSQLDatabase }
+</pre>
+    </article>
 </section>
+
 
 
 
@@ -163,10 +177,6 @@
 
 	<div class="clearfix"></div>
 
-	
-		<div class="col-md-3">
-			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
-		</div>
 	
 
 </div>
